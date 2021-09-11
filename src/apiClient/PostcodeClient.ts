@@ -5,7 +5,7 @@ import parseResponse from "./parseResponse";
 import type { PostCode } from "../types";
 import type { PostCodeResponse } from "./types";
 
-const BASE_URL = "api.postcodes.io/postcodes"
+const BASE_URL = "https://api.postcodes.io/postcodes"
 
 type HttpClient = typeof fetch
 
