@@ -1,5 +1,6 @@
 import type { PostCodeResponse } from "./types"
 import type { SinglePostcodeInfo } from "../types";
+import { isSinglePostCodeInfo } from "../types";
 
 export default function parseResponse(postcodeJSON: any): PostCodeResponse {
     const postCodeList = postcodeJSON?.result;
@@ -21,18 +22,6 @@ function removeUnwantedFields(pc: SinglePostcodeInfo): SinglePostcodeInfo {
         region: pc.region,
         country: pc.country
     };
-}
-
-
-function isSinglePostCodeInfo(postcodeJSON: any): postcodeJSON is SinglePostcodeInfo {
-    const postcode = postcodeJSON?.postcode;
-    const region = postcodeJSON?.region;
-    const country = postcodeJSON?.region;
-    return (
-        typeof postcode == "string" &&
-        typeof region == "string" &&
-        typeof country == "string"
-    )
 }
 
 function isPostCodeList(postCodeList: any): postCodeList is SinglePostcodeInfo[] {

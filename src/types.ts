@@ -30,3 +30,14 @@ export interface SinglePostcodeInfo {
     country: string,
     region: string,
 }
+
+export function isSinglePostCodeInfo(postcodeJSON: any): postcodeJSON is SinglePostcodeInfo {
+    const postcode = postcodeJSON?.postcode;
+    const region = postcodeJSON?.region;
+    const country = postcodeJSON?.region;
+    return (
+        typeof postcode == "string" &&
+        typeof region == "string" &&
+        typeof country == "string"
+    )
+}
