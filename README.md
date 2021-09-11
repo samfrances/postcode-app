@@ -12,3 +12,10 @@ external source, the rest of the app is much more straightforward.
 As a result, you won't see much except the "create react app" starter
 app if you run `yarn start`. However, if you look in the dev console,
 you will see the result of two requests, one valid, one invalid.
+
+Next steps:
+- [ ] Unit tests for `apiClient/parseResponse.ts`
+- [ ] Unit tests for `PostcodeClient`, using mock of `fetch`.
+- [ ] Redux state and async workflow for making and storing requests, tracking request state, etc.
+- [ ] React view
+- [ ] Routing using React Router
