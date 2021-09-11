@@ -1,7 +1,7 @@
 import type { PostCodeResponse } from "./types"
 import type { SinglePostcodeInfo } from "../types";
 
-export default function parseResponse(postcodeJSON: any, neabyJSON: any): PostCodeResponse {
+export default function parseResponse(postcodeJSON: any): PostCodeResponse {
     const postCodeList = postcodeJSON?.result;
     if (!isPostCodeList(postCodeList)) {
         return {"error": true, message: "Invalid postcode data received"};
