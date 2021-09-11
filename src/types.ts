@@ -1,6 +1,6 @@
 
 
-const PostCodeType = Symbol();
+declare const PostCodeType: unique symbol;
 
 export class PostCode {
   [PostCodeType]: void;
