@@ -10,6 +10,12 @@ This app provides a GUI for the [postcodes.io](https://www.postcodes.io) API.
 - Typescript typing
 - Type validation of data fetched from the API, with unit tests
 
+## Usage
+
+Run `yarn start` to run the development server.
+
+Run `yarn test` to run the tests.
+
 ## Next steps
 
 - [ ] Unit tests for `PostcodeClient`, using mock of `fetch`.
