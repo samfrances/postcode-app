@@ -10,8 +10,8 @@ export default function PostCodeInfoView({ data }: Props) {
 
   const datadisplay =
     data == null ? <Loading />
-    : data.error ? <ErrorView message={data.message} />
-    : <DataDisplay data={data.info} />;
+      : data.error ? <ErrorView message={data.message} />
+        : <DataDisplay data={data.info} />;
 
   return datadisplay;
 }
@@ -22,5 +22,5 @@ function DataDisplay({ data }: { data: Success["info"] }) {
     <h2>Postcode: {data.postcode}</h2>
     <p>Region: {data.region}</p>
     <p>Country: {data.country}</p>
-  </div>
+  </div>;
 }

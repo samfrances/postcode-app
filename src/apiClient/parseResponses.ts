@@ -1,4 +1,4 @@
-import type { NearestPostCodesResponse, PostCodeInfoResponse } from "./types"
+import type { NearestPostCodesResponse, PostCodeInfoResponse } from "./types";
 import type { PostCodeInfo } from "../types";
 import { isPostCodeInfo } from "../types";
 
@@ -10,7 +10,7 @@ export function parsePostCode(postcodeJSON: any): PostCodeInfoResponse {
   return {
     error: false,
     info: removeUnwantedFields(postCode)
-  }
+  };
 }
 
 export function parseNearest(postcodeJSON: any): NearestPostCodesResponse {

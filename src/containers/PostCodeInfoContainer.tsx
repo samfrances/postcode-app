@@ -9,13 +9,13 @@ import type { PostCode } from "../types";
 const client = new ApiClient();
 
 function usePostCodeInfo(postcode: PostCode) {
-  const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeInfoResponse>(null)
+  const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeInfoResponse>(null);
   useEffect(() => {
     (async () => {
       const result = await client.postCode(postcode);
       setPostCodeInfo(result);
-    })()
-  }, [postcode.value])
+    })();
+  }, [postcode.value]);
 
   return postCodeInfo;
 }
