@@ -15,5 +15,6 @@ you will see the result of two requests, one valid, one invalid.
 
 Next steps:
 - [ ] Unit tests for `PostcodeClient`, using mock of `fetch`.
-- [ ] Redux state and async workflow for making and storing requests, tracking request state, etc.
 - [ ] API shortcut didn't work - need extra API call for info on original
+- [ ] Write form
+- [ ] Write some GUI tests
