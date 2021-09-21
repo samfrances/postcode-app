@@ -1,5 +1,5 @@
 import type { PostCodeResponse } from "../apiClient/types";
-import type { PostCode } from "../types";
+import type { PostCode, SinglePostcodeInfo } from "../types";
 
 interface Props {
   postcode: PostCode;
@@ -33,6 +33,24 @@ function ErrorDisplay({ message }: Pick<ErrorResponse, "message">) {
 type Success = Extract<PostCodeResponse, {error: false}>
 function DataDisplay(data: Success["info"]) {
   return <div>
-    {JSON.stringify(data)}
+    <p>Region: {data.postcode.region}</p>
+    <p>Country: {data.postcode.country}</p>
+    <h3>Nearby</h3>
+    <ul>
+    {
+      data.nearby.map(pc => <NearbyPostCode {...pc} />)
+    }
+    </ul>
   </div>
+}
+
+function NearbyPostCode(postcode: SinglePostcodeInfo) {
+  return (
+    <li>{postcode.postcode}
+      <ul>
+        <li>Region: {postcode.region}</li>
+        <li>Country: {postcode.country}</li>
+      </ul>
+    </li>
+  )
 }
