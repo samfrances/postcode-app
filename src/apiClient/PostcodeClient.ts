@@ -19,6 +19,9 @@ export default class PostcodeClient {
         const genericErrorMessage = "Error requesting postcode info";
         try {
             const postcodeReq = await this.doRequest(`${this.baseURL}/${postcode.toString()}/nearest/`);
+            if (postcodeReq.status == 404) {
+                return { error: true, message: "Postcode not found" };
+            }
             if (postcodeReq.status !== 200) {
                 // TODO: deal with more status codes
                 return { error: true, message: genericErrorMessage }

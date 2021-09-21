@@ -9,6 +9,7 @@ import ApiClient from "./apiClient";
 import { PostCode } from "./types";
 import './App.css';
 import { PostCodeResponse } from './apiClient/types';
+import PostCodeView from './components/PostCodeView';
 
 function App() {
   return (
@@ -33,31 +34,24 @@ const client = new ApiClient();
 
 function usePostCodeApi(postcode: PostCode) {
   const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeResponse>(null)
-
   useEffect(() => {
     (async () => {
       const result = await client.getPostCodeInfo(postcode);
       setPostCodeInfo(result);
     })()
-  }, [postcode])
+  }, [postcode.value])
 
   return postCodeInfo;
 }
 
 function PostCodeContainer() {
-  const { postcode } = useParams<{ postcode: string }>();
-  const postCodeInfo = usePostCodeApi(PostCode.create(postcode));
+  const params = useParams<{ postcode: string }>();
+  const postcode = PostCode.create(params.postcode)
+  const data = usePostCodeApi(postcode);
   return (
-    <PostCodeView {...{postCodeInfo }} />
+    <PostCodeView {...{postcode, data }} />
   );
 }
 
-function PostCodeView(postcode_info: any) {
-  return (
-    <div>
-      <h2>Postcode {JSON.stringify(postcode_info)}</h2>
-    </div>
-  );
-}
 
 export default App;
