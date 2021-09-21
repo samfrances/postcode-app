@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { PostCodeResponse } from "../apiClient/types";
 import type { PostCode, SinglePostcodeInfo } from "../types";
 
@@ -38,7 +39,7 @@ function DataDisplay(data: Success["info"]) {
     <h3>Nearby</h3>
     <ul>
     {
-      data.nearby.map(pc => <NearbyPostCode {...pc} />)
+      data.nearby.map(pc => <NearbyPostCode key={pc.postcode} {...pc} />)
     }
     </ul>
   </div>
@@ -46,7 +47,7 @@ function DataDisplay(data: Success["info"]) {
 
 function NearbyPostCode(postcode: SinglePostcodeInfo) {
   return (
-    <li>{postcode.postcode}
+    <li><Link to={`/postcode/${postcode.postcode}/`}>{postcode.postcode}</Link>
       <ul>
         <li>Region: {postcode.region}</li>
         <li>Country: {postcode.country}</li>
