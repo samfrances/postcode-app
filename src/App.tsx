@@ -11,12 +11,11 @@ import "./vendor/Skeleton-2.0.4/css/normalize.css";
 import "./vendor/Skeleton-2.0.4/css/skeleton.css";
 import NearestPostCodesContainer from './containers/NearestPostCodesContainer';
 import PostCodeInfoContainer from './containers/PostCodeInfoContainer';
-import Loading from './components/LoadingView';
 import SearchForm from './components/SearchForm';
 
 function App() {
   return (
-  <Router>
+    <Router>
       <Switch>
         <Route exact path="/">
           <Home />

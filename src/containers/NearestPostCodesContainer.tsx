@@ -21,6 +21,6 @@ function useNearestPostCodes(postcode: PostCode) {
 }
 
 export default function NearestPostCodesContainer({ postcode }: { postcode: PostCode }) {
-    const data = useNearestPostCodes(postcode);
-    return <NearestPostCodesView data={data} />;
+  const data = useNearestPostCodes(postcode);
+  return <NearestPostCodesView data={data} />;
 }

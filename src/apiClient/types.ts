@@ -1,8 +1,8 @@
 import type { PostCodeInfo } from "../types";
 
 export interface ResponseError {
-    error: true,
-    message: string
+  error: true,
+  message: string
 }
 
 type ResponseSuccess<T> = { error: false } & T
