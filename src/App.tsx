@@ -6,23 +6,25 @@ import {
   useParams
 } from "react-router-dom";
 import { PostCode } from "./types";
+import "./App.css";
 import "./vendor/Skeleton-2.0.4/css/normalize.css";
 import "./vendor/Skeleton-2.0.4/css/skeleton.css";
 import NearestPostCodesContainer from './containers/NearestPostCodesContainer';
 import PostCodeInfoContainer from './containers/PostCodeInfoContainer';
+import Loading from './components/LoadingView';
 
 function App() {
   return (
   <Router>
-    <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/postcode/:postcode">
-        <PostCodePage />
-      </Route>
-    </Switch>
-  </Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/postcode/:postcode">
+          <PostCodePage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
