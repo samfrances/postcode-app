@@ -4,7 +4,7 @@ import { isSinglePostCodeInfo } from "../types";
 
 export default function parseResponse(postcodeJSON: any): PostCodeResponse {
     const postCodeList = postcodeJSON?.result;
-    if (!isPostCodeList(postCodeList)) {
+    if (!isPostCodeList(postCodeList) || postCodeList.length < 1) {
         return {"error": true, message: "Invalid postcode data received"};
     }
     return {
