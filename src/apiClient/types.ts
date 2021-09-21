@@ -1,6 +1,6 @@
 import type { PostCodeInfo } from "../types";
 
-interface ResponseError {
+export interface ResponseError {
     error: true,
     message: string
 }

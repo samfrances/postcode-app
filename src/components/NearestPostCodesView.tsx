@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import type { NearestPostCodesResponse } from "../apiClient/types";
 import type { PostCodeInfo } from "../types";
+import ErrorView from "./ErrorView";
+import Loading from "./LoadingView";
 
 interface Props {
   data: NearestPostCodesResponse|null;
@@ -10,19 +12,10 @@ export default function NearbyPostCodeView({ data }: Props) {
 
   const datadisplay =
     data == null ? <Loading />
-    : data.error ? <ErrorDisplay message={data.message} />
+    : data.error ? <ErrorView message={data.message} />
     : <DataDisplay data={data.nearest} />;
 
   return datadisplay;
-}
-
-function Loading() {
-  return <div>Loading</div>;
-}
-
-type ErrorResponse = Extract<NearestPostCodesResponse, {error: true}>
-function ErrorDisplay({ message }: Pick<ErrorResponse, "message">) {
-  return <h3>Error: {message}</h3>;
 }
 
 type Success = Extract<NearestPostCodesResponse, {error: false}>
