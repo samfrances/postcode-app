@@ -12,7 +12,7 @@ export default function NearbyPostCodeView({ data }: Props) {
 
   const datadisplay =
     data == null ? <Loading />
-    : data.error ? <ErrorView message={data.message} />
+    : data.error ? <ErrorView message={data.message} headingLevel={5} />
     : <DataDisplay data={data.nearest} />;
 
   return datadisplay;

@@ -10,3 +10,7 @@
     transform: rotate(360deg);
   }
 }
+
+#app {
+    margin-top: 20px;
+}

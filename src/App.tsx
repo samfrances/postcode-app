@@ -12,6 +12,7 @@ import "./vendor/Skeleton-2.0.4/css/skeleton.css";
 import NearestPostCodesContainer from './containers/NearestPostCodesContainer';
 import PostCodeInfoContainer from './containers/PostCodeInfoContainer';
 import Loading from './components/LoadingView';
+import SearchForm from './components/SearchForm';
 
 function App() {
   return (
@@ -30,8 +31,10 @@ function App() {
 
 function Home() {
   return (
-    <div className="container">
-      <h2>Home</h2>
+    <div id="app" className="container">
+      <div className="row">
+        <SearchForm />
+      </div>
     </div>
   );
 }
@@ -40,9 +43,16 @@ function PostCodePage() {
   const params = useParams<{ postcode: string }>();
   const postcode = PostCode.create(params.postcode)
   return (
-    <div className="container">
-      <PostCodeInfoContainer postcode={postcode} />
-      <NearestPostCodesContainer postcode={postcode} />
+    <div id="app" className="container">
+      <div className="row">
+        <SearchForm />
+      </div>
+      <div className="row">
+        <PostCodeInfoContainer postcode={postcode} />
+      </div>
+      <div className="row">
+        <NearestPostCodesContainer postcode={postcode} />
+      </div>
     </div>
   );
 }
