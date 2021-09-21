@@ -14,8 +14,6 @@ app if you run `yarn start`. However, if you look in the dev console,
 you will see the result of two requests, one valid, one invalid.
 
 Next steps:
-- [ ] Unit tests for `apiClient/parseResponse.ts`
 - [ ] Unit tests for `PostcodeClient`, using mock of `fetch`.
 - [ ] Redux state and async workflow for making and storing requests, tracking request state, etc.
-- [ ] React view
-- [ ] Routing using React Router
+- [ ] API shortcut didn't work - need extra API call for info on original
