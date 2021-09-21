@@ -18,3 +18,5 @@ Next steps:
 - [ ] API shortcut didn't work - need extra API call for info on original
 - [ ] Write form
 - [ ] Write some GUI tests
+- [ ] Improve CSS
+- [ ] Better spinner icon
