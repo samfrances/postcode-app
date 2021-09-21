@@ -31,15 +31,22 @@ function Home() {
 
 const client = new ApiClient();
 
+function usePostCodeApi(postcode: PostCode) {
+  const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeResponse>(null)
+
+  useEffect(() => {
+    (async () => {
+      const result = await client.getPostCodeInfo(postcode);
+      setPostCodeInfo(result);
+    })()
+  }, [postcode])
+
+  return postCodeInfo;
+}
+
 function PostCodeContainer() {
   const { postcode } = useParams<{ postcode: string }>();
-  const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeResponse>(null)
-  useEffect(() => {
-    client.getPostCodeInfo(PostCode.create(postcode))
-      .then(result => {
-        setPostCodeInfo(result);
-      });
-  }, [postcode])
+  const postCodeInfo = usePostCodeApi(PostCode.create(postcode));
   return (
     <PostCodeView {...{postCodeInfo }} />
   );
