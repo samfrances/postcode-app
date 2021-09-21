@@ -1,2 +1,3 @@
 import PSClient from "./PostcodeClient";
-export const PostcodeClient = PSClient;
+const PostcodeClient = PSClient;
+export default PostcodeClient;

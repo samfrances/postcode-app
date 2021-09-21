@@ -11,7 +11,7 @@ type HttpClient = typeof fetch
 
 export default class PostcodeClient {
     constructor(
-        private doRequest: HttpClient,
+        private doRequest: HttpClient = fetch.bind(window),
         private readonly baseURL = BASE_URL,
     ) {}
 
