@@ -1,21 +1,20 @@
 # README
 
-Within the scope of 1 hour, I was able to write an API client that
-reliably and safely marshalls responses from the
-postcodes API into the typescript type-system.
+This app provides a GUI for the [postcodes.io](https://www.postcodes.io) API.
 
-I decided to concentrate on this element, as this is the area where
-the most risk of errors and bugs exists. Once one is confident that
-the types do accurately reflect the information received from the
-external source, the rest of the app is much more straightforward.
+## React Features
 
-As a result, you won't see much except the "create react app" starter
-app if you run `yarn start`. However, if you look in the dev console,
-you will see the result of two requests, one valid, one invalid.
+- `useEffect` hook
+- Custom hooks
+- Routing with [React Router](https://reactrouter.com/)
+- Typescript typing
+- Type validation of data fetched from the API, with unit tests
 
-Next steps:
+## Next steps
+
 - [ ] Unit tests for `PostcodeClient`, using mock of `fetch`.
 - [ ] Write some GUI tests
 - [ ] Improve CSS
 - [ ] Lint
-- [ ] Regularise indentation
+- [ ] Form validation
+- [ ] Type-ahead suggestions
