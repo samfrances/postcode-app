@@ -1,13 +1,13 @@
 import type { PostCodeInfo } from "../types";
 
-interface ResponseSuccess {
-    error: false,
-    info: PostCodeInfo
-}
-
 interface ResponseError {
     error: true,
     message: string
 }
 
-export type PostCodeResponse = ResponseSuccess | ResponseError
+type ResponseSuccess<T> = { error: false } & T
+
+export type PostCodeAPIResponse<T> = ResponseError | ResponseSuccess<T>;
+
+export type PostCodeInfoResponse = PostCodeAPIResponse<{ info: PostCodeInfo }>
+export type NearestPostCodesResponse = PostCodeAPIResponse<{ nearest: PostCodeInfo[] }>

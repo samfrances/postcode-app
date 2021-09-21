@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useParams
 } from "react-router-dom";
-import ApiClient from "./apiClient";
 import { PostCode } from "./types";
 import './App.css';
-import { PostCodeResponse } from './apiClient/types';
-import PostCodeView from './components/PostCodeView';
+import NearestPostCodesContainer from './containers/NearestPostCodesContainer';
+import PostCodeInfoContainer from './containers/PostCodeInfoContainer';
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
         <Home />
       </Route>
       <Route path="/postcode/:postcode">
-        <PostCodeContainer />
+        <PostCodePage />
       </Route>
     </Switch>
   </Router>
@@ -30,26 +29,14 @@ function Home() {
   return <h2>Home</h2>;
 }
 
-const client = new ApiClient();
-
-function usePostCodeApi(postcode: PostCode) {
-  const [postCodeInfo, setPostCodeInfo] = useState<null|PostCodeResponse>(null)
-  useEffect(() => {
-    (async () => {
-      const result = await client.getPostCodeInfo(postcode);
-      setPostCodeInfo(result);
-    })()
-  }, [postcode.value])
-
-  return postCodeInfo;
-}
-
-function PostCodeContainer() {
+function PostCodePage() {
   const params = useParams<{ postcode: string }>();
   const postcode = PostCode.create(params.postcode)
-  const data = usePostCodeApi(postcode);
   return (
-    <PostCodeView {...{postcode, data }} />
+    <div>
+      <PostCodeInfoContainer postcode={postcode} />
+      <NearestPostCodesContainer postcode={postcode} />
+    </div>
   );
 }
 

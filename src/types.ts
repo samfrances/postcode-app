@@ -21,17 +21,12 @@ export class PostCode {
 }
 
 export interface PostCodeInfo {
-    postcode: SinglePostcodeInfo,
-    nearby: SinglePostcodeInfo[]
-}
-
-export interface SinglePostcodeInfo {
     postcode: string,
     country: string,
     region: string,
 }
 
-export function isSinglePostCodeInfo(postcodeJSON: any): postcodeJSON is SinglePostcodeInfo {
+export function isPostCodeInfo(postcodeJSON: any): postcodeJSON is PostCodeInfo {
     const postcode = postcodeJSON?.postcode;
     const region = postcodeJSON?.region;
     const country = postcodeJSON?.region;

@@ -1,6 +1,6 @@
-import parseResponse from "./parseResponse";
+import { parseNearest, parsePostCode } from "./parseResponses";
 
-describe("parseResponse()", () => {
+describe("parsePostCode()", () => {
 
     describe("should reject invalid data", () => {
         const examples = {
@@ -9,14 +9,74 @@ describe("parseResponse()", () => {
             "empty array": [],
             "array of numbers": [1,2,3],
             "empty object": {},
-            "empty result array": {result: []},
+            "result is array": {result: [{}, {}]},
+            "invalid result": {result: {foo: "bar"}}
+        }
+
+        for (const [key, val] of Object.entries(examples)) {
+            it(key, () => {
+                const result = parsePostCode(val)
+                expect(result).toEqual({
+                    error: true,
+                    message: "Invalid postcode data received"
+                })
+            })
+        }
+    })
+
+    it("should process valid data", () => {
+        const data = {
+            postcode: "NW1 6XE",
+            region: "Greater London",
+            country: "United Kingdom"
+        };
+        const response = {
+            result: data
+        };
+        const parsed = parsePostCode(response);
+        expect(parsed.error).toBeFalsy()
+        if (!parsed.error) {
+            expect(parsed.info).toEqual(data)
+        }
+    });
+
+    it("should remove unwanted fields", () => {
+        const data = {
+            postcode: "NW1 6XE",
+            region: "Greater London",
+            country: "United Kingdom"
+        };
+        const response = {
+            result: {
+                ...data,
+                x: 88
+            }
+        };
+        const parsed = parsePostCode(response);
+        expect(parsed.error).toBeFalsy()
+        if (!parsed.error) {
+            expect(parsed.info).toEqual(data)
+        }
+    });
+
+});
+
+describe("parseNearest()", () => {
+
+    describe("should reject invalid data", () => {
+        const examples = {
+            "null": null,
+            "undefined": undefined,
+            "empty array": [],
+            "array of numbers": [1,2,3],
+            "empty object": {},
             "empty results": {result: [{}, {}]},
             "invalid results": {result: [1,2,3]}
         }
 
         for (const [key, val] of Object.entries(examples)) {
             it(key, () => {
-                const result = parseResponse(val)
+                const result = parseNearest(val)
                 expect(result).toEqual({
                     error: true,
                     message: "Invalid postcode data received"
@@ -27,6 +87,7 @@ describe("parseResponse()", () => {
 
     describe("should process valid data", () => {
         const examples = {
+            "empty": [],
             "single entry": [
                 {
                     postcode: "NW1 6XE",
@@ -67,13 +128,10 @@ describe("parseResponse()", () => {
 
         for (const [key, val] of Object.entries(examples)) {
             it(key, () => {
-                const result = parseResponse({ result: val })
+                const result = parseNearest({ result: val })
                 expect(result.error).toEqual(false);
                 if (!result.error) {
-                    expect(result.info).toEqual({
-                        postcode: val[0],
-                        nearby: val.slice(1)
-                    })
+                    expect(result.nearest).toEqual(val)
                 }
             })
         }
@@ -108,12 +166,9 @@ describe("parseResponse()", () => {
             entry3,
         ]
 
-        expect(parseResponse({ result })).toEqual({
+        expect(parseNearest({ result })).toEqual({
             error: false,
-            info: {
-                postcode: entry1,
-                nearby: [entry2, entry3]
-            }
+            nearest: [entry1, entry2, entry3]
         })
     })
 

@@ -1,9 +1,9 @@
 import "whatwg-fetch"
 
-import parseResponse from "./parseResponse";
+import { parseNearest, parsePostCode } from "./parseResponses";
 
 import type { PostCode } from "../types";
-import type { PostCodeResponse } from "./types";
+import type { NearestPostCodesResponse, PostCodeAPIResponse, PostCodeInfoResponse } from "./types";
 
 const BASE_URL = "https://api.postcodes.io/postcodes"
 
@@ -15,10 +15,18 @@ export default class PostcodeClient {
         private readonly baseURL = BASE_URL,
     ) {}
 
-    async getPostCodeInfo(postcode: PostCode): Promise<PostCodeResponse> {
+    async postCode(postcode: PostCode): Promise<PostCodeInfoResponse> {
+        return await this.get(`${postcode.toString()}/`, parsePostCode);
+    }
+
+    async nearest(postcode: PostCode): Promise<NearestPostCodesResponse> {
+        return await this.get(`${postcode.toString()}/nearest/`, parseNearest);
+    }
+
+    private async get<T>(path: string, parseResult: (json: any) => PostCodeAPIResponse<T>): Promise<PostCodeAPIResponse<T>> {
         const genericErrorMessage = "Error requesting postcode info";
         try {
-            const postcodeReq = await this.doRequest(`${this.baseURL}/${postcode.toString()}/nearest/`);
+            const postcodeReq = await this.doRequest(`${this.baseURL}/${path}`);
             if (postcodeReq.status === 404) {
                 return { error: true, message: "Postcode not found" };
             }
@@ -28,7 +36,7 @@ export default class PostcodeClient {
             }
             try {
                 const postcodeData = await postcodeReq.json();
-                return parseResponse(postcodeData);
+                return parseResult(postcodeData);
             } catch (e) {
                 console.error(e);
                 return { error: true, message: "Failed to parse JSON"};
@@ -37,7 +45,6 @@ export default class PostcodeClient {
             console.log(e)
             return {error: true, message: genericErrorMessage};
         }
-
     }
 }
 
